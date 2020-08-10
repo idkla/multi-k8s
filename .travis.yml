@@ -4,21 +4,21 @@ services:
   - docker
 
 before_install:
-  - docker build -t wk/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t idkla/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true wk/react-test npm test 
+  - docker run -e CI=true idkla/react-test npm test 
 
 after_success:
-  - docker build -t wk/multi-client ./client
-  - docker build -t wk/multi-nginx ./nginx
-  - docker build -t wk/multi-server ./server
-  - docker build -t wk/multi-worker ./worker
+  - docker build -t idkla/multi-client ./client
+  - docker build -t idkla/multi-nginx ./nginx
+  - docker build -t idkla/multi-server ./server
+  - docker build -t idkla/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push wk/multi-client
-  - docker push wk/multi-nginx
-  - docker push wk/multi-server
-  - docker push wk/multi-worker
+  - docker push idkla/multi-client
+  - docker push idkla/multi-nginx
+  - docker push idkla/multi-server
+  - docker push idkla/multi-worker
   
