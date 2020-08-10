@@ -3,7 +3,34 @@
     "containerDefinitions": [
         {
             "name": "client",
-            "image": "wk/multi-client"
+            "image": "idkla/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "idkla/multi-server",
+            "hostname": "api",
+            "essential": false   
+        },
+        {
+            "name": "worker",
+            "image": "idkla/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "idkla/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
         }
     ]
 }
