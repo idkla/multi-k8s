@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: weikang-app-tls
+spec:
+  secretName: weikang-app
+  issuerRef: 
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: weikang.app
+  dnsNames:
+    - weikang.app
+    - www.weikang.app
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - weikang.app
+          - www.weikang.app
